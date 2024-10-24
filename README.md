@@ -1,5 +1,6 @@
 # gixposed
 [![](https://visitcount.itsvg.in/api?id=WH1T3-E4GL3&label=Repository%20Views%20Count&color=0&icon=5&pretty=false)](https://visitcount.itsvg.in)
+
 Gixposed is a powerful command-line tool designed to search the commit history of Git repositories for sensitive information, such as API keys and access tokens. Its purpose is to help developers and security professionals quickly identify and remediate potential security vulnerabilities in their codebases.
 
 # Installation
