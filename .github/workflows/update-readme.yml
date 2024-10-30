@@ -1,0 +1,32 @@
+name: Update README with Release Version
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Update README.md with latest version
+        id: update-readme
+        run: |
+          # Get the latest release tag and filename based on the release event
+          latest_version="${{ github.event.release.tag_name }}"
+          deb_file="gixposed_${latest_version#v}.deb"
+          
+          # Update README.md with the latest version and download link
+          sed -i "s|wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/.*|wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/${latest_version}/${deb_file}|" README.md
+          sed -i "s|sudo dpkg -i .*|sudo dpkg -i ${deb_file}|" README.md
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "GitHub Actions"
+          git config --global user.email "actions@github.com"
+          git add README.md
+          git commit -m "Update README.md for release ${{ github.event.release.tag_name }}"
+          git push
