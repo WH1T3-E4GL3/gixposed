@@ -5,8 +5,8 @@ Gixposed is a powerful command-line tool designed to search the commit history o
 
 # Installation
 
-    wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/v1.0.0/gixposed_1.0.0.deb
-    sudo dpkg -i gixposed_1.0.0.deb
+    wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/v1.0.1/gixposed_1.0.1.deb
+    sudo dpkg -i gixposed_1.0.1.deb
 
 # Usage
     gixposed --s 'your_secret_to_check' --p '/root/your_repo_dir'
