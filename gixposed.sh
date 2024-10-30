@@ -13,7 +13,7 @@ echo -e "${COLOR_CYAN}
   ___ _ (_)__ __ ___  ___   ___ ___  ___/ /
  / _ \`// / \\ \\ // _ \\/ _ \\ (_-</ -_)/ _  /
  \\_, //_/ /_\\_\\/ .__/\\___//___/\\__/ \\_,_/
-/___/         /_/
+ /___/         /_/
                            @whxitte
 ${COLOR_RESET}"
 
@@ -79,9 +79,19 @@ get_github_repo_details() {
 # Check if the specified path is a Git repository
 while true; do
     if check_git_repo "$repo_path"; then
-        echo -e "${COLOR_GREEN}Current directory is a Git repository. Proceeding...${COLOR_RESET}"
-        cd "$repo_path" || exit
-        break
+        echo -e "${COLOR_GREEN}Current directory is a Git repository.${COLOR_RESET}"
+        echo -ne "${COLOR_YELLOW}Do you want to proceed? (y/n): ${COLOR_RESET}"
+        read -r proceed_choice
+
+        if [[ "$proceed_choice" =~ ^[Yy]$ ]]; then
+            cd "$repo_path" || exit
+            break
+        elif [[ "$proceed_choice" =~ ^[Nn]$ ]]; then
+            echo -e "${COLOR_RED}Exiting the script.${COLOR_RESET}"
+            exit 0
+        else
+            echo -e "${COLOR_RED}Invalid choice. Please enter 'y' or 'n'.${COLOR_RESET}"
+        fi
     else
         echo -e "${COLOR_RED}This is not a Git repository.${COLOR_RESET}"
         echo -ne "${COLOR_YELLOW}Please enter a valid Git repository path: ${COLOR_RESET}"
