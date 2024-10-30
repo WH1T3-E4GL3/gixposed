@@ -3,6 +3,7 @@ name: Update README with Release Version
 on:
   release:
     types: [published]
+  workflow_dispatch:  # Adds manual trigger
 
 jobs:
   update-readme:
@@ -15,8 +16,8 @@ jobs:
       - name: Update README.md with latest version
         id: update-readme
         run: |
-          # Get the latest release tag and filename based on the release event
-          latest_version="${{ github.event.release.tag_name }}"
+          # If triggered by a release, use the release tag; otherwise, default to 'v1.0.0' for testing
+          latest_version="${{ github.event.release.tag_name || 'v1.0.0' }}"
           deb_file="gixposed_${latest_version#v}.deb"
           
           # Update README.md with the latest version and download link
@@ -28,5 +29,5 @@ jobs:
           git config --global user.name "GitHub Actions"
           git config --global user.email "actions@github.com"
           git add README.md
-          git commit -m "Update README.md for release ${{ github.event.release.tag_name }}"
+          git commit -m "Update README.md for release ${{ github.event.release.tag_name || 'manual update' }}"
           git push
