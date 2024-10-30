@@ -27,12 +27,15 @@ jobs:
               https://api.github.com/repos/WH1T3-E4GL3/gixposed/releases/latest | jq -r .tag_name)
           fi
           echo "Latest version: $latest_version"
+          # Strip the 'v' if it exists
+          deb_file_version="${latest_version#v}"
           echo "latest_version=$latest_version" >> $GITHUB_ENV
+          echo "deb_file_version=$deb_file_version" >> $GITHUB_ENV
 
       - name: Update README.md with latest version
         id: update-readme
         run: |
-          deb_file="gixposed_${{ env.latest_version#v }}.deb"
+          deb_file="gixposed_${deb_file_version}.deb"
           
           # Update README.md with the latest version and download link
           sed -i "s|wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/.*|wget https://github.com/WH1T3-E4GL3/gixposed/releases/download/${{ env.latest_version }}/${deb_file}|" README.md
