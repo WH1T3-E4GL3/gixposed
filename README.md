@@ -15,3 +15,6 @@ or
     gixposed
 
 ![Screenshot_2024-10-22_02_45_05](https://github.com/user-attachments/assets/724bfde9-5c4b-4cb6-a57e-640a1f5a68ec)
+
+Buy me a coffee:
+![bmc_qr](https://github.com/user-attachments/assets/17a91d95-65d5-472b-a79b-29b9d86d1803)
